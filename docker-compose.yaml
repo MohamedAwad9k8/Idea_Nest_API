@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  org-management-app:
+    image: org-management-app-image
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongodb
+    environment:
+      MONGO_URL: "mongodb://mongodb:27017"
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: ideanest
+
+volumes:
+  mongodb_data:
