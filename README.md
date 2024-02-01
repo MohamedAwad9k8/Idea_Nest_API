@@ -1,42 +1,73 @@
-# Golang API Application
+## Golang-Authentication-Authorization-System
 
-This repository houses a Golang-based API application designed for managing organizations. The application includes features such as token management, CRUD operations for organizations, user invitations, and integration with MongoDB using Docker.
+This project is an organization-user JWT authentication system implemented in Golang using the Gin framework. It integrates MongoDB for data storage, Redis for caching, and Docker for containerization
 
-## Project Structure
 
-The project structure is designed to assist you in getting started quickly. You can modify it as needed for your specific requirements.
+#### INSTALLATION
 
-- **cmd/**: Contains the main application file.
-  - **main.go**: The entry point of the application.
+#### Using Docker 
+ - adjust env variable in yaml file
+ - Run `docker-compose up`
+#### Without Docker
+- Clone this repo
+- Change directory to the cloned repo
+- Ensure you have `go` installed on your machine.
+- Run `go mod download`
+- Ensure you have `mongodb` installed on your machine OR you can create a cloud `monog` database.
+- Run `go run main.go`
 
-- **pkg/**: Core logic of the application divided into different packages.
-  - **api/**: API handling components.
-    - **handlers/**: API route handlers.
-    - **middleware/**: Middleware functions.
-    - **routes/**: Route definitions.
-  - **controllers/**: Business logic for each route.
-  - **database/**: Database-related code.
-    - **mongodb/**
-      - **models/**: Data models.
-      - **repository/**: Database operations.
-  - **utils/**: Utility functions.
-  - **app.go**: Application initialization and setup.
 
-- **docker/**: Docker-related files.
-  - **Dockerfile**: Instructions for building the application image.
 
-- **docker-compose.yaml**: Configuration for Docker Compose.
+#### APIs&Features
 
-- **config/**: Configuration files for the application.
-  - **app-config.yaml**: General application settings.
-  - **database-config.yaml**: Database connection details.
+- **LOGIN** POST -  User authentication with JWT.
+- **SIGNUP** POST - User registration functionality.
+- **RefreshJWTToken** POST - Refresh JWT token for prolonged sessions.
+- **GetAllUsers** GET -  Retrieve all users (for Admin or testing purposes).
+- **GetUserbyID** GET - Retrieve user details by ID.
+- **DeleteUserbyID** DELETE - Delete user by ID.
+- **UpdateUser** PUT - Update user information.
+- **GetAllOrganizations** GET - Retrieve details of all organizations.
+- **GetOrganizationbyID** GET - Retrieve organization details by ID.
+- **AddOrganization** POST - Add a new organization.
+- **InviteMemberIntoOrganization** POST -  Invite members with readonly access.
+- **UpdateOrganization** PUT - Update organization details (Full Access required).
+- **DeleteOrganization** DELETE - Delete organization by id (Full Access required).
+- **TokenRefresh** POST - Refresh authentication token.
+- **Bearer Authorization** -  Secure API access using Bearer token.
+- **JWT Authentication** - JSON Web Token-based user authentication.
 
-- **tests/**: Directory for tests.
-  - **e2e/**: End-to-End tests.
-  - **unit/**: Unit tests.
 
-- **.gitignore**: Specifies files and directories to be ignored by Git.
+#### Project Structure
+<pre>
+|-- pkg/
+|   |-- controllers/
+|   |   - Controllers manage the application's flow and business logic. They receive input from the handlers, process it using the models, and return results to be presented by the views.
+|   |-- db/models/
+|   |   - Represents the data layer of the application. It typically includes data models.
+|   |-- db/repository/
+|   |   - Contain operations for interacting with the MongoDB database or other data sources.
+|   |-- utils/
+|       - Contains utility functions or modules that can be used across different parts of the application. Utilities might include helper functions, generic components, or modules that provide common functionalities.
+|-- Api/
+|   |-- routes/
+|   |   - Contains the definitions of routes and their corresponding handlers, responsible for routing incoming requests to the appropriate controllers.
+|   |-- middlewares/
+|   |   - Includes middleware components that can be executed before or after the request reaches the controller. Middlewares often handle tasks like authentication, logging, etc.
+|   |-- handlers/
+|       - This folder might contain modules or classes that handle specific types of requests. Handlers are often responsible for interacting with the request and response objects, processing data, and calling the appropriate controller methods.
+|-- cmd/
+|   - main.go: entry point of app
+|-- go.mod
+|-- go.sum
+|-- Dockerfile : Instructions for building the application image.
+|-- docker-compose.yaml: Configuration for Docker Compose.
+</pre>
+#### Technologies Used
 
-## Getting Started
-
-To begin working with the application, follow the instructions in the project documentation. Feel free to adjust the project structure as needed based on your preferences and evolving project requirements.
+- **Golang**
+- **Gin (Web framework)**
+- **MongoDB (Database)**
+- **Redis (Caching)**
+- **Docker (Containerization)**
+- **docker-compose (Container orchestration)**
