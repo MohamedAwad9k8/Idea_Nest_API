@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Idea_Nest_API.iml" filepath="$PROJECT_DIR$/.idea/Idea_Nest_API.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/GoApi.iml" filepath="$PROJECT_DIR$/.idea/GoApi.iml" />
     </modules>
   </component>
 </project>
